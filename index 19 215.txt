@@ -1,0 +1,236 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEMO | Quantum RWA Ecosystem</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&family=Playfair+Display:wght@600&display=swap"
+        rel="stylesheet">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="mode-real-estate">
+
+    <div class="reality-switch">
+        <span class="switch-label">REALITY SWITCH</span>
+        <label class="switch">
+            <input type="checkbox" id="realityToggle" onchange="toggleMode()">
+            <span class="slider"></span>
+        </label>
+    </div>
+
+    <div class="container">
+
+        <!-- CORPORATE INTERFACE (Real Estate Mode) -->
+        <div class="corporate-interface">
+            <div class="glass-panel" style="text-align:center;">
+                <h1>SEMO</h1>
+                <p style="font-size:1.2rem; color:#666;">Sistema Espejo Modular Orbital</p>
+                <div
+                    style="margin-top:15px; display:inline-block; padding:5px 15px; border:1px solid var(--corp-blue); border-radius:20px; font-size:0.9rem;">
+                    Patrocinado por: <strong>SEDE MORELIA</strong>
+                </div>
+            </div>
+
+            <div class="glass-panel">
+                <h2>Portafolio de Proyectos RWA</h2>
+                <p>Nuestra cartera de activos reales tokenizados. Escalable y transparente.</p>
+
+                <div class="projects-grid" id="realProjectsContainer">
+                    <!-- JS Injected Content -->
+                </div>
+            </div>
+        </div>
+
+
+        <!-- TYCOON INTERFACE (Game Mode) -->
+        <div class="tycoon-interface">
+            <div class="glass-panel">
+
+                <div class="game-header">
+                    <h1 style="margin:0;">⚡ SEMO TYCOON</h1>
+                    <div class="user-status">
+                        <span id="userRankIcon">👤</span>
+                        <span id="userNameDisplay">Invitado (Demo)</span>
+                        <span style="cursor:pointer; opacity:0.5;" onclick="unlockAdmin()" title="Admin Login">🔒</span>
+                    </div>
+                </div>
+
+                <!-- LIVE COUNTER WIDGET -->
+                <div class="card-ludens">
+                    <div class="card-header">
+                        <div class="card-title">ESTADO DEL SERVIDOR</div>
+                        <div class="badge-rarity">EN VIVO</div>
+                    </div>
+
+                    <div style="margin-top: 15px; font-size: 0.8rem; color: #00ff88;">
+                        Jugadores Activos: <span id="contador-actual">...</span> / 1,000
+                    </div>
+
+                    <div class="xp-bar-container">
+                        <div id="barra-progreso" class="xp-bar-fill" style="width: 0%;"></div>
+                    </div>
+
+                    <p style="font-size: 0.7rem; color: #64748b; margin-top: 10px;">
+                        Sede Morelia: Fase de Cimentación
+                    </p>
+                </div>
+
+                <div class="game-hud">
+                    <div class="stat-box">
+                        <div class="stat-val" id="balanceDisplay">100</div>
+                        <div class="stat-lbl">Saldo SEMO</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-val" id="shareDisplay">0%</div>
+                        <div class="stat-lbl">Participación Pool</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-val" id="assetsDisplay">0</div>
+                        <div class="stat-lbl">Activos</div>
+                    </div>
+                </div>
+
+                <div id="adminPanel" class="admin-console">
+                    <div style="color:var(--neon-pink); font-weight:bold; margin-bottom:5px;">
+                        🛠️ MODO DIOS: Inyección de Liquidez
+                        <span style="float:right; cursor:pointer;" onclick="hideAdmin()">❌</span>
+                    </div>
+                    <div class="console-log" id="gameLog">> Sistema listo. Esperando input...</div>
+
+                    <div class="admin-controls">
+                        <input type="number" id="adminAmount" class="admin-input"
+                            placeholder="Cantidad a inyectar (Ej: 5000)" value="1000">
+                        <button class="btn-admin" onclick="triggerAdminInjection()">INYECTAR CAPITAL</button>
+                    </div>
+                    <p style="font-size:0.7rem; color:#666; margin-top:5px;">
+                        * La distribución es equitativa basada en el % de participación de cada usuario.
+                    </p>
+                </div>
+
+                <p style="text-align:center; color:#aaa; margin-bottom:20px;">
+                    Colapsa la probabilidad. Invierte en activos para asegurar tu cuota del mercado.
+                </p>
+                <div class="assets-grid">
+                    <div class="asset-card" onclick="buyAsset('Glamping', 20, 2)">
+                        <span class="asset-icon">🏕️</span>
+                        <h3>Glamping</h3>
+                        <p style="color:var(--neon-blue);">20 SEMO</p>
+                    </div>
+                    <div class="asset-card" onclick="buyAsset('Club House', 50, 6)">
+                        <span class="asset-icon">🏊</span>
+                        <h3>Club House</h3>
+                        <p style="color:var(--neon-blue);">50 SEMO</p>
+                    </div>
+                    <div class="asset-card" onclick="buyAsset('Torre Morelia', 100, 15)">
+                        <span class="asset-icon">🏢</span>
+                        <h3>Torre Morelia</h3>
+                        <p style="color:var(--neon-blue);">100 SEMO</p>
+                    </div>
+                    <div class="asset-card" onclick="alert('Próximamente: Proyecto AIIO con IA Integrada.')">
+                        <span class="asset-icon">🧠</span>
+                        <h3>AIIO Lab</h3>
+                        <p style="color:#666;">Bloqueado</p>
+                    </div>
+                </div>
+
+                <div class="cta-container" id="ctaSection">
+                    <p id="ctaText" style="font-size:1.1rem; margin-bottom:15px;">
+                        Tus resultados son virtuales. ¿Deseas hacerlos reales?
+                    </p>
+                    <button id="ctaBtn" class="btn-mega" onclick="openModal()">
+                        ACTIVAR CAPITAL SEMILLA
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MERGED PAYMENT MODAL -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span style="float:right; cursor:pointer;" onclick="closeModal()">❌</span>
+
+            <div class="semo-form-container">
+                <h3 style="text-align:center; color: var(--semo-gold); margin-top:0;">📦 RECARGA DE CAPITAL SEMILLA</h3>
+
+                <div class="tabs">
+                    <div class="tab-btn active" onclick="showTab('fiat')">FIAT (Nequi)</div>
+                    <div class="tab-btn" onclick="showTab('paypal')">PAYPAL</div>
+                    <div class="tab-btn" onclick="showTab('crypto')">CRYPTO</div>
+                </div>
+
+                <div id="fiat" class="tab-content active">
+                    <strong>🏦 Transferencia Colombia:</strong><br>
+                    Bancolombia / Ahorros: 85184420967 ⚠️<br>
+                    Titular: Wilson Gallego / SEMO<br>
+                    <em> Adjunta el número de guía abajo.</em>
+                </div>
+
+                <div id="paypal" class="tab-content">
+                    <strong>💳 Pago Internacional:</strong><br>
+                    <a href="https://www.paypal.me/paypal.me/alejo0329/100" target="_blank" style="color:#00b8ff;">Pagar
+                        $100 USD
+                        vía PayPal ⚠️</a><br>
+                    <em>Paga y pega tu ID de transacción.</em>
+                </div>
+
+                <div id="crypto" class="tab-content">
+                    <strong>⛓️ USDT (BEP-20):</strong><br>
+                    Red: Binance Smart Chain<br>
+                    Wallet: <0xfb9cbb2e52b6b5cf366c8b7971d71ee52453a3ce< /small> ⚠️<br>
+                        <em> Despues de realizar el pago pega el Hash (TxID) abajo.</em>
+                </div>
+
+                <form id="pagoSemoForm" onsubmit="handlePaymentSubmit(event)">
+                    <div class="input-group">
+                        <label>Tu Nombre (Avatar)</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Ej: Inversor_Pro" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Correo Electrónico (ID de Jugador)</label>
+                        <input type="email" id="correo" name="correo" placeholder="tu@email.com" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Monto del Kit</label>
+                        <select id="cantidad" name="cantidad">
+                            <option value="100">$100 USD (Kit Semilla)</option>
+                            <option value="200">$200 USD</option>
+                            <option value="500">$500 USD</option>
+                            <option value="1000">$1000 USD (Kit Elite)</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Método utilizado</label>
+                        <select id="metodo" name="metodo">
+                            <option value="Nequi/Bancolombia">Nequi / Bancolombia</option>
+                            <option value="PayPal">PayPal</option>
+                            <option value="USDT">USDT (Crypto)</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Hash de Transacción / Número de Guía</label>
+                        <input type="text" id="txHash" name="txHash" placeholder="Pega aquí el comprobante" required>
+                    </div>
+
+                    <button type="submit" class="btn-submit">🚀 ACTIVAR MI CAPITAL SEMILLA</button>
+                </form>
+                <p id="msg" style="text-align:center; font-size:0.8rem; margin-top:10px;"></p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+
+</html>
